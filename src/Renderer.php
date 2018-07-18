@@ -74,7 +74,7 @@ class Renderer
     {
         $modifier = 1 -  ($value / $max);
 
-        $gray = 255 * $modifier;
+        $gray = (245 * $modifier);
 
         return $this->getRgbHex($gray, $gray, $gray);
     }
