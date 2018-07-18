@@ -74,14 +74,17 @@ class Renderer
     {
         $modifier = 1 -  ($value / $max);
 
-        $base = 200 * $modifier;
+        $gray = 255 * $modifier;
 
-        if ($base < 0) {
-            $base = 0;
-        }
+        return $this->getRgbHex($gray, $gray, $gray);
+    }
 
-        $grayScale = str_pad(dechex($base), 2, '0', STR_PAD_LEFT);
+    private function getRgbHex(int $r, int $g, int $b)
+    {
+        $colors = array_map(function ($color) {
+            return str_pad(dechex($color), 2, '0', STR_PAD_LEFT);
+        }, [$r, $g, $b]);
 
-        return '#' . str_repeat($grayScale, 3);
+        return '#' . implode('', $colors);
     }
 }
