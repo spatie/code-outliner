@@ -36,14 +36,14 @@ code-outliner <file> [--output=] [--extensions=]
 
 Pass a single file to the command, and you'll get output like this.
 
-![Outline of a single file](./docs/outline-single.png)
+![Outline of a single file](https://spatie.github.io/code-outliner/outline-single.png)
 
 ### Overlaying multiple files
 
 Pass a directory path to the command, and it'll overlay all files on top of each other.
 The darker areas represent areas where there's more code across all files.
 
-![Outline of multiple files](./docs/outline-multiple.png)
+![Outline of multiple files](https://spatie.github.io/code-outliner/outline-multiple.png)
 
 ### Filtering extensions
 
