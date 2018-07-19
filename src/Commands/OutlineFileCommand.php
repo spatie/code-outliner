@@ -75,11 +75,7 @@ class OutlineFileCommand extends Command
 
     protected function getOutputFilePath(?string $path): string
     {
-        if ($path) {
-            return $path;
-        }
-
-        return './outline-code.png';
+        return $path ?? './outline-code.png';
     }
 
     protected function getParser(string $path, ?string $extensions, ProgressBar $progressBar): Parser
