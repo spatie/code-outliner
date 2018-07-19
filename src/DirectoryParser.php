@@ -2,6 +2,7 @@
 
 namespace Spatie\Outline;
 
+use Closure;
 use Symfony\Component\Finder\Finder;
 
 class DirectoryParser implements Parser
@@ -11,6 +12,12 @@ class DirectoryParser implements Parser
 
     /** @var array */
     private $extensions = ['php'];
+
+    /** @var Closure */
+    private $initListener;
+
+    /** @var Closure */
+    private $progressListener;
 
     public function __construct(string $path)
     {
@@ -35,17 +42,41 @@ class DirectoryParser implements Parser
         );
     }
 
+    public function setInitListener(Closure $initListener): DirectoryParser
+    {
+        $this->initListener = $initListener;
+
+        return $this;
+    }
+
+    public function setProgressListener(Closure $progressListener): DirectoryParser
+    {
+        $this->progressListener = $progressListener;
+
+        return $this;
+    }
+
     public function getParsed(): array
     {
         $parsed = [];
 
         $files = Finder::create()->files()->in($this->path)->name($this->getExtensionsSearchQuery());
 
+        if ($this->initListener) {
+            call_user_func_array($this->initListener, [$files->count()]);
+        }
+
         /** @var \Symfony\Component\Finder\SplFileInfo $file */
         foreach ($files as $file) {
             $fileParser = new FileParser($file->getRealPath());
 
             $parsed[] = $fileParser->getParsed();
+
+            if (! $this->progressListener) {
+                continue;
+            }
+
+            call_user_func($this->progressListener);
         }
 
         return $this->flatten($parsed);

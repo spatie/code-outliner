@@ -2,10 +2,12 @@
 
 namespace Spatie\Outline;
 
+use Closure;
+
 class Renderer
 {
     /** @var array */
-    protected $lines;
+    private $lines;
 
     public function __construct(array $lines)
     {

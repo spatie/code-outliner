@@ -8,10 +8,12 @@ use Spatie\Outline\Renderer;
 use Spatie\Outline\FileParser;
 use Spatie\Browsershot\Browsershot;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Finder\Finder;
 
 class OutlineFileCommand extends Command
 {
@@ -28,17 +30,48 @@ class OutlineFileCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $parsed = $this->parseFiles($input, $output);
+
+        $rendered = $this->renderParsed($parsed, $input, $output);
+
+        $outputFilePath = $this->saveImage($rendered, $input, $output);
+
+        $output->writeln("Saved to {$outputFilePath}");
+    }
+
+    private function parseFiles(InputInterface $input, OutputInterface $output): array
+    {
         $path = $input->getArgument('path');
 
-        $parser = $this->getParser($path, $input->getOption('extensions'));
+        $output->writeln("Parsing files..");
 
-        $renderer = new Renderer($parser->getParsed());
+        $progressBar = new ProgressBar($output);
+
+        $parser = $this->getParser($path, $input->getOption('extensions'), $progressBar);
+
+        $progressBar->finish();
+
+        return $parser->getParsed();
+    }
+
+    private function renderParsed(array $parsed, InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln("\nRendering..");
+
+        $renderer = new Renderer($parsed);
+
+        return $renderer->getRendered();
+    }
+
+    private function saveImage(string $rendered, InputInterface $input, OutputInterface $output): string
+    {
+        $output->writeln("Saving as image..");
 
         $outputFilePath = $this->getOutputFilePath($input->getOption('output'));
 
-        Browsershot::html($renderer->getRendered())->select('body')->save($outputFilePath);
+        Browsershot::html($rendered)->select('body')->save($outputFilePath);
 
-        $output->writeln("Saved to {$outputFilePath}");
+        return $outputFilePath;
     }
 
     private function getOutputFilePath(?string $path): string
@@ -50,10 +83,17 @@ class OutlineFileCommand extends Command
         return './outline-code.png';
     }
 
-    private function getParser(string $path, ?string $extensions): Parser
+    private function getParser(string $path, ?string $extensions, ProgressBar $progressBar): Parser
     {
         if (is_dir($path)) {
-            return (new DirectoryParser($path))->setExtensionsFromString($extensions ?? 'php');
+            return (new DirectoryParser($path))
+                ->setExtensionsFromString($extensions ?? 'php')
+                ->setInitListener(function (int $count) use ($progressBar) {
+                    $progressBar->start($count);
+                })
+                ->setProgressListener(function () use ($progressBar) {
+                    $progressBar->advance();
+                });
         }
 
         return new FileParser($path);
