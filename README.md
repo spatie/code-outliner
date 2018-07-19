@@ -46,7 +46,7 @@ By default, PHP files will be scanned.
 You're able to specify other and multiple extensions with the `--extensions` option.
 
 ```php
-php console.php outline --extensions="html,twig"
+code-outliner --extensions="html,twig"
 ```
 
 ### Security
