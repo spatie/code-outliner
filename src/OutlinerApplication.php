@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\Outline;
+namespace Spatie\CodeOutline;
 
-use Spatie\Outline\Commands\OutlineFileCommand;
+use Spatie\CodeOutline\Commands\OutlineFileCommand;
 use Symfony\Component\Console\Application;
 
 class OutlinerApplication extends Application

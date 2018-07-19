@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\Outline\Commands;
+namespace Spatie\CodeOutline\Commands;
 
 use Spatie\Browsershot\Browsershot;
-use Spatie\Outline\DirectoryParser;
-use Spatie\Outline\FileParser;
-use Spatie\Outline\Parser;
-use Spatie\Outline\Renderer;
+use Spatie\CodeOutline\DirectoryParser;
+use Spatie\CodeOutline\FileParser;
+use Spatie\CodeOutline\Parser;
+use Spatie\CodeOutline\Renderer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;

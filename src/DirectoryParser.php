@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Outline;
+namespace Spatie\CodeOutline;
 
 use Closure;
 use Symfony\Component\Finder\Finder;
