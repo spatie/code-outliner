@@ -23,7 +23,7 @@ class Renderer
     {
         $rendered = [];
 
-        $max = $this->getMaxCharacterValue($this->lines);
+        $max = $this->getMaxLineLength($this->lines);
 
         foreach ($this->lines as $lineNumber => $line) {
             $lineNumber = str_pad($lineNumber, 3, '0', STR_PAD_LEFT);
@@ -55,19 +55,19 @@ class Renderer
         return "<div>{$lineNumber}: ".implode('', $renderedLine).'</div>';
     }
 
-    protected function getMaxCharacterValue(array $lines): int
+    protected function getMaxLineLength(array $lines): int
     {
-        $maxPerLine = [];
+        $maximumLineLenghts = [];
 
         foreach ($lines as $line) {
             if (!$line) {
                 continue;
             }
 
-            $maxPerLine[] = max($line);
+            $maximumLineLenghts[] = max($line);
         }
 
-        return max($maxPerLine);
+        return max($maximumLineLenghts);
     }
 
     protected function getColor(int $value, int $max): string
