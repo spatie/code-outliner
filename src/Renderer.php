@@ -23,31 +23,31 @@ class Renderer
     {
         $rendered = [];
 
-        $max = $this->getMaxLineLength($this->lines);
+        $maximumLineLength = $this->getMaximumLineLength($this->lines);
 
         foreach ($this->lines as $lineNumber => $line) {
             $lineNumber = str_pad($lineNumber, 3, '0', STR_PAD_LEFT);
 
-            $rendered[] = $this->renderLine($line, $max, $lineNumber);
+            $rendered[] = $this->renderLine($line, $maximumLineLength, $lineNumber);
         }
 
         return implode(PHP_EOL, $rendered);
     }
 
-    protected function renderLine(?array $line, int $max, string $lineNumber): string
+    protected function renderLine(?array $line, int $maximumLineLength, string $lineNumber): string
     {
         if (!$line) {
             return "<div>{$lineNumber}: </div>";
         }
 
-        $renderedLine = array_map(function ($characterValue) use ($max) {
+        $renderedLine = array_map(function ($characterValue) use ($maximumLineLength) {
             $class = 'code';
 
             if ($characterValue < 0) {
                 $class .= ' indent';
             }
 
-            $color = $this->getColor($characterValue, $max);
+            $color = $this->getColor($characterValue, $maximumLineLength);
 
             return "<span class=\"{$class}\" style=\"background-color:{$color}\">&nbsp;</span>";
         }, $line);
@@ -55,7 +55,7 @@ class Renderer
         return "<div>{$lineNumber}: ".implode('', $renderedLine).'</div>';
     }
 
-    protected function getMaxLineLength(array $lines): int
+    protected function getMaximumLineLength(array $lines): int
     {
         $maximumLineLenghts = [];
 
