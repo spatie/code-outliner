@@ -42,7 +42,7 @@ class OutlineFileCommand extends Command
     {
         $path = $input->getArgument('path');
 
-        $output->writeln('Parsing files..');
+        $output->writeln('Parsing files...');
 
         $progressBar = new ProgressBar($output);
 
@@ -55,7 +55,7 @@ class OutlineFileCommand extends Command
 
     protected function renderParsed(array $parsed, InputInterface $input, OutputInterface $output)
     {
-        $output->writeln("\nRendering..");
+        $output->writeln("\nRendering...");
 
         $renderer = new Renderer($parsed);
 
@@ -64,7 +64,7 @@ class OutlineFileCommand extends Command
 
     protected function saveImage(string $rendered, InputInterface $input, OutputInterface $output): string
     {
-        $output->writeln('Saving as image..');
+        $output->writeln('Saving as image...');
 
         $outputFilePath = $this->getOutputFilePath($input->getOption('output'));
 
