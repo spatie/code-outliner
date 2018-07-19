@@ -8,12 +8,6 @@ More information about the visual perception of code here: [https://www.stitcher
 
 ## Installation
 
-You can install the package via composer:
-
-```
-composer require spatie/code-outliner
-```
-
 [spatie/browsershot](https://github.com/spatie/browsershot) is required to generate images. 
 Please refer to the Browsershot documentation for all details, most important is to install puppeteer.
 
@@ -21,14 +15,16 @@ Please refer to the Browsershot documentation for all details, most important is
 npm install puppeteer --global
 ```
 
+You can install the package via composer:
+
 ```
-chmod +x ./code-outliner
+composer global require spatie/code-outliner
 ```
 
 ## Usage
 
 ```bash
-php console.php outline <file> [--output=] [--extensions=]
+code-outliner <file> [--output=] [--extensions=]
 ```
 
 ### Outlining a single file
