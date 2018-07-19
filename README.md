@@ -1,4 +1,4 @@
-# Code outliner
+# Create a visual representation of your code
 
 [![Latest Version](https://img.shields.io/github/release/spatie/code-outliner.svg?style=flat-square)](https://github.com/spatie/code-outliner/releases)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/code-outliner.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/code-outliner)
