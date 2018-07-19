@@ -42,14 +42,14 @@ class DirectoryParser implements Parser
         );
     }
 
-    public function setInitListener(Closure $initListener): self
+    public function onStartParsing(Closure $initListener): self
     {
         $this->initListener = $initListener;
 
         return $this;
     }
 
-    public function setProgressListener(Closure $progressListener): self
+    public function onFileParsed(Closure $progressListener): self
     {
         $this->progressListener = $progressListener;
 

@@ -87,10 +87,10 @@ class OutlineFileCommand extends Command
         if (is_dir($path)) {
             return (new DirectoryParser($path))
                 ->setExtensionsFromString($extensions ?? 'php')
-                ->setInitListener(function (int $count) use ($progressBar) {
+                ->onStartParsing(function (int $count) use ($progressBar) {
                     $progressBar->start($count);
                 })
-                ->setProgressListener(function () use ($progressBar) {
+                ->onFileParsed(function () use ($progressBar) {
                     $progressBar->advance();
                 });
         }
