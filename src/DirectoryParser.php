@@ -58,7 +58,7 @@ class DirectoryParser implements Parser
 
     public function getParsed(): array
     {
-        $parsed = [];
+        $parsedFiles = [];
 
         $files = Finder::create()->files()->in($this->path)->name($this->getExtensionsRegex());
 
@@ -70,7 +70,7 @@ class DirectoryParser implements Parser
         foreach ($files as $file) {
             $fileParser = new FileParser($file->getRealPath());
 
-            $parsed[] = $fileParser->getParsed();
+            $parsedFiles[] = $fileParser->getParsed();
 
             if (!$this->progressListener) {
                 continue;
@@ -79,28 +79,28 @@ class DirectoryParser implements Parser
             call_user_func($this->progressListener);
         }
 
-        return $this->flatten($parsed);
+        return $this->summarize($parsedFiles);
     }
 
-    protected function flatten(array $pages): array
+    protected function summarize(array $parsedFiles): array
     {
-        $flattened = [];
+        $summarizedFiles = [];
 
-        foreach ($pages as $page) {
-            foreach ($page as $lineIndex => $line) {
+        foreach ($parsedFiles as $parsedFile) {
+            foreach ($parsedFile as $lineIndex => $line) {
                 if (!$line) {
-                    $flattened[$lineIndex] = $flattened[$lineIndex] ?? null;
+                    $summarizedFiles[$lineIndex] = $summarizedFiles[$lineIndex] ?? null;
 
                     continue;
                 }
 
                 foreach ($line as $cursorIndex => $characterValue) {
-                    $flattened[$lineIndex][$cursorIndex] = ($flattened[$lineIndex][$cursorIndex] ?? 0) + $characterValue;
+                    $summarizedFiles[$lineIndex][$cursorIndex] = ($summarizedFiles[$lineIndex][$cursorIndex] ?? 0) + $characterValue;
                 }
             }
         }
 
-        return $flattened;
+        return $summarizedFiles;
     }
 
     protected function getExtensionsRegex(): string
