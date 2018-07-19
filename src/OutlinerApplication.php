@@ -9,7 +9,7 @@ class OutlinerApplication extends Application
 {
     public function __construct()
     {
-        parent::__construct("Spatie's code outliner", '0.1');
+        parent::__construct("code outliner", '0.1');
 
         $command = new OutlineFileCommand();
 
