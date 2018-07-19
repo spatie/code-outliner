@@ -38,7 +38,7 @@ class OutlineFileCommand extends Command
         $output->writeln("Saved to {$outputFilePath}");
     }
 
-    private function parseFiles(InputInterface $input, OutputInterface $output): array
+    protected function parseFiles(InputInterface $input, OutputInterface $output): array
     {
         $path = $input->getArgument('path');
 
@@ -53,7 +53,7 @@ class OutlineFileCommand extends Command
         return $parser->getParsed();
     }
 
-    private function renderParsed(array $parsed, InputInterface $input, OutputInterface $output)
+    protected function renderParsed(array $parsed, InputInterface $input, OutputInterface $output)
     {
         $output->writeln("\nRendering..");
 
@@ -62,7 +62,7 @@ class OutlineFileCommand extends Command
         return $renderer->getRendered();
     }
 
-    private function saveImage(string $rendered, InputInterface $input, OutputInterface $output): string
+    protected function saveImage(string $rendered, InputInterface $input, OutputInterface $output): string
     {
         $output->writeln("Saving as image..");
 
@@ -73,7 +73,7 @@ class OutlineFileCommand extends Command
         return $outputFilePath;
     }
 
-    private function getOutputFilePath(?string $path): string
+    protected function getOutputFilePath(?string $path): string
     {
         if ($path) {
             return $path;
@@ -82,7 +82,7 @@ class OutlineFileCommand extends Command
         return './outline-code.png';
     }
 
-    private function getParser(string $path, ?string $extensions, ProgressBar $progressBar): Parser
+    protected function getParser(string $path, ?string $extensions, ProgressBar $progressBar): Parser
     {
         if (is_dir($path)) {
             return (new DirectoryParser($path))

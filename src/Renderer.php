@@ -5,7 +5,7 @@ namespace Spatie\Outline;
 class Renderer
 {
     /** @var array */
-    private $lines;
+    protected $lines;
 
     public function __construct(array $lines)
     {
@@ -19,7 +19,7 @@ class Renderer
         return str_replace('{{ outline }}', $lines, file_get_contents(__DIR__ . '/index.twig'));
     }
 
-    private function renderLines()
+    protected function renderLines()
     {
         $rendered = [];
 
@@ -34,7 +34,7 @@ class Renderer
         return implode(PHP_EOL, $rendered);
     }
 
-    private function renderLine(?array $line, int $max, string $lineNumber): string
+    protected function renderLine(?array $line, int $max, string $lineNumber): string
     {
         if (! $line) {
             return "<div>{$lineNumber}: </div>";
@@ -55,7 +55,7 @@ class Renderer
         return "<div>{$lineNumber}: " . implode('', $renderedLine) . '</div>';
     }
 
-    private function getMaxCharacterValue(array $lines): int
+    protected function getMaxCharacterValue(array $lines): int
     {
         $maxPerLine = [];
 
@@ -70,7 +70,7 @@ class Renderer
         return max($maxPerLine);
     }
 
-    private function getColor(int $value, int $max): string
+    protected function getColor(int $value, int $max): string
     {
         $modifier = 1 -  ($value / $max);
 
@@ -79,7 +79,7 @@ class Renderer
         return $this->getRgbHex($gray, $gray, $gray);
     }
 
-    private function getRgbHex(int $r, int $g, int $b)
+    protected function getRgbHex(int $r, int $g, int $b)
     {
         $colors = array_map(function ($color) {
             return str_pad(dechex($color), 2, '0', STR_PAD_LEFT);

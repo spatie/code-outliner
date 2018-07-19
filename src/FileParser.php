@@ -5,7 +5,7 @@ namespace Spatie\Outline;
 class FileParser implements Parser
 {
     /** @var string */
-    private $path;
+    protected $path;
 
     public function __construct(string $path)
     {

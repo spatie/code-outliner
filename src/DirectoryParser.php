@@ -8,16 +8,16 @@ use Symfony\Component\Finder\Finder;
 class DirectoryParser implements Parser
 {
     /** @var string */
-    private $path;
+    protected $path;
 
     /** @var array */
-    private $extensions = ['php'];
+    protected $extensions = ['php'];
 
     /** @var Closure */
-    private $initListener;
+    protected $initListener;
 
     /** @var Closure */
-    private $progressListener;
+    protected $progressListener;
 
     public function __construct(string $path)
     {
@@ -82,7 +82,7 @@ class DirectoryParser implements Parser
         return $this->flatten($parsed);
     }
 
-    private function flatten(array $pages): array
+    protected function flatten(array $pages): array
     {
         $flattened = [];
 
@@ -103,7 +103,7 @@ class DirectoryParser implements Parser
         return $flattened;
     }
 
-    private function getExtensionsSearchQuery(): string
+    protected function getExtensionsSearchQuery(): string
     {
         $query = implode('|', array_map(function ($extension) {
             return "\.{$extension}\$";
