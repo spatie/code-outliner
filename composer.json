@@ -29,5 +29,8 @@
         "psr-4": {
             "Spatie\\Outline\\": "src/"
         }
-    }
+    },
+    "bin": [
+        "code-outliner"
+    ]
 }

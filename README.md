@@ -21,6 +21,10 @@ Please refer to the Browsershot documentation for all details, most important is
 npm install puppeteer --global
 ```
 
+```
+chmod +x ./code-outliner
+```
+
 ## Usage
 
 ```bash
