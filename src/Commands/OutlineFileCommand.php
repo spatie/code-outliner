@@ -2,11 +2,11 @@
 
 namespace Spatie\Outline\Commands;
 
+use Spatie\Browsershot\Browsershot;
 use Spatie\Outline\DirectoryParser;
+use Spatie\Outline\FileParser;
 use Spatie\Outline\Parser;
 use Spatie\Outline\Renderer;
-use Spatie\Outline\FileParser;
-use Spatie\Browsershot\Browsershot;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -42,7 +42,7 @@ class OutlineFileCommand extends Command
     {
         $path = $input->getArgument('path');
 
-        $output->writeln("Parsing files..");
+        $output->writeln('Parsing files..');
 
         $progressBar = new ProgressBar($output);
 
@@ -64,7 +64,7 @@ class OutlineFileCommand extends Command
 
     protected function saveImage(string $rendered, InputInterface $input, OutputInterface $output): string
     {
-        $output->writeln("Saving as image..");
+        $output->writeln('Saving as image..');
 
         $outputFilePath = $this->getOutputFilePath($input->getOption('output'));
 
