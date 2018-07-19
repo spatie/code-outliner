@@ -15,12 +15,16 @@ composer require spatie/code-outliner
 ```
 
 [spatie/browsershot](https://github.com/spatie/browsershot) is required to generate images. 
-Please refer to the documentation for more details.
+Please refer to the Browsershot documentation for all details, most important is to install puppeteer.
+
+```
+npm install puppeteer --global
+```
 
 ## Usage
 
 ```bash
-php console.php outline <file> [--output=]
+php console.php outline <file> [--output=] [--extensions=]
 ```
 
 ### Outlining a single file
@@ -35,6 +39,15 @@ Pass a directory path to the command, and it'll overlay all files on top of each
 The darker areas represent areas where there's more code across all files.
 
 ![Outline of multiple files](./docs/outline-multiple.png)
+
+### Filtering extensions
+
+By default, PHP files will be scanned. 
+You're able to specify other and multiple extensions with the `--extensions` option.
+
+```php
+php console.php outline --extensions="html,twig"
+```
 
 ### Security
 

@@ -22,13 +22,15 @@ class OutlineFileCommand extends Command
         $this->addArgument('path', InputArgument::REQUIRED);
 
         $this->addOption('output', null, InputOption::VALUE_OPTIONAL, 'Where to save the output file (it must be a PNG).');
+
+        $this->addOption('extensions', null, InputOption::VALUE_OPTIONAL, 'The extensions of which files to scan for. Eg. `php,html`');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $path = $input->getArgument('path');
 
-        $parser = $this->getParser($path);
+        $parser = $this->getParser($path, $input->getOption('extensions'));
 
         $renderer = new Renderer($parser->getParsed());
 
@@ -48,10 +50,10 @@ class OutlineFileCommand extends Command
         return './outline-code.png';
     }
 
-    private function getParser(string $path): Parser
+    private function getParser(string $path, ?string $extensions): Parser
     {
         if (is_dir($path)) {
-            return new DirectoryParser($path);
+            return (new DirectoryParser($path))->setExtensionsFromString($extensions ?? 'php');
         }
 
         return new FileParser($path);

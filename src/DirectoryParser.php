@@ -9,16 +9,37 @@ class DirectoryParser implements Parser
     /** @var string */
     private $path;
 
+    /** @var array */
+    private $extensions = ['php'];
+
     public function __construct(string $path)
     {
         $this->path = $path;
+    }
+
+    public function setExtensions(array $extensions): DirectoryParser
+    {
+        $this->extensions = $extensions;
+
+        return $this;
+    }
+
+    public function setExtensionsFromString(string $extensionsString): DirectoryParser
+    {
+        $extensions = explode(',', $extensionsString);
+
+        return $this->setExtensions(
+            array_map(function (string $extension) {
+                return str_replace(['*', '.'], '', $extension);
+            }, $extensions)
+        );
     }
 
     public function getParsed(): array
     {
         $parsed = [];
 
-        $files = Finder::create()->files()->in($this->path)->name('*.php');
+        $files = Finder::create()->files()->in($this->path)->name($this->getExtensionsSearchQuery());
 
         /** @var \Symfony\Component\Finder\SplFileInfo $file */
         foreach ($files as $file) {
@@ -26,7 +47,6 @@ class DirectoryParser implements Parser
 
             $parsed[] = $fileParser->getParsed();
         }
-
 
         return $this->flatten($parsed);
     }
@@ -44,11 +64,20 @@ class DirectoryParser implements Parser
                 }
 
                 foreach ($line as $cursorIndex => $characterValue) {
-                    $flattened[$lineIndex][$cursorIndex] =  ($flattened[$lineIndex][$cursorIndex] ?? 0) + $characterValue;
+                    $flattened[$lineIndex][$cursorIndex] = ($flattened[$lineIndex][$cursorIndex] ?? 0) + $characterValue;
                 }
             }
         }
 
         return $flattened;
+    }
+
+    private function getExtensionsSearchQuery(): string
+    {
+        $query = implode('|', array_map(function ($extension) {
+            return "\.{$extension}\$";
+        }, $this->extensions));
+
+        return "/{$query}/";
     }
 }
