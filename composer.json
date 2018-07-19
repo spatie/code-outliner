@@ -20,10 +20,12 @@
     },
     "require": {
         "php": "^7.1",
-        "larapack/dd": "^1.1",
         "symfony/finder": "^4.1",
         "symfony/console": "^4.1",
         "spatie/browsershot": "^3.23"
+    },
+    "require-dev": {
+        "larapack/dd": "^1.1"
     },
     "autoload": {
         "psr-4": {
