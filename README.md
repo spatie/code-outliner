@@ -2,7 +2,7 @@
 
 [![Latest Version](https://img.shields.io/github/release/spatie/code-outliner.svg?style=flat-square)](https://github.com/spatie/code-outliner/releases)
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/code-outliner.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/code-outliner)
-[![StyleCI](https://styleci.io/repos/33916850/shield)](https://styleci.io/repos/33916850)
+[![StyleCI](https://github.styleci.io/repos/141413296/shield?branch=master)](https://github.styleci.io/repos/141413296)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/code-outliner.svg?style=flat-square)](https://packagist.org/packages/spatie/code-outliner)
 
 You're reading code on a daily basis, code should be optimised for that. 
