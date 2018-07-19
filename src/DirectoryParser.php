@@ -60,7 +60,7 @@ class DirectoryParser implements Parser
     {
         $parsed = [];
 
-        $files = Finder::create()->files()->in($this->path)->name($this->getExtensionsSearchQuery());
+        $files = Finder::create()->files()->in($this->path)->name($this->getExtensionsRegex());
 
         if ($this->initListener) {
             call_user_func_array($this->initListener, [$files->count()]);
@@ -103,7 +103,7 @@ class DirectoryParser implements Parser
         return $flattened;
     }
 
-    protected function getExtensionsSearchQuery(): string
+    protected function getExtensionsRegex(): string
     {
         $query = implode('|', array_map(function ($extension) {
             return "\.{$extension}\$";
