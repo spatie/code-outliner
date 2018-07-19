@@ -21,7 +21,7 @@ class FileParser implements Parser
         $outline = [];
 
         foreach ($lines as $line) {
-            if (! strlen($line)) {
+            if (!strlen($line)) {
                 $outline[] = null;
 
                 continue;

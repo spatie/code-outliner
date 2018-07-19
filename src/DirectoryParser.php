@@ -24,14 +24,14 @@ class DirectoryParser implements Parser
         $this->path = $path;
     }
 
-    public function setExtensions(array $extensions): DirectoryParser
+    public function setExtensions(array $extensions): self
     {
         $this->extensions = $extensions;
 
         return $this;
     }
 
-    public function setExtensionsFromString(string $extensionsString): DirectoryParser
+    public function setExtensionsFromString(string $extensionsString): self
     {
         $extensions = explode(',', $extensionsString);
 
@@ -42,14 +42,14 @@ class DirectoryParser implements Parser
         );
     }
 
-    public function setInitListener(Closure $initListener): DirectoryParser
+    public function setInitListener(Closure $initListener): self
     {
         $this->initListener = $initListener;
 
         return $this;
     }
 
-    public function setProgressListener(Closure $progressListener): DirectoryParser
+    public function setProgressListener(Closure $progressListener): self
     {
         $this->progressListener = $progressListener;
 
@@ -72,7 +72,7 @@ class DirectoryParser implements Parser
 
             $parsed[] = $fileParser->getParsed();
 
-            if (! $this->progressListener) {
+            if (!$this->progressListener) {
                 continue;
             }
 
@@ -88,7 +88,7 @@ class DirectoryParser implements Parser
 
         foreach ($pages as $page) {
             foreach ($page as $lineIndex => $line) {
-                if (! $line) {
+                if (!$line) {
                     $flattened[$lineIndex] = $flattened[$lineIndex] ?? null;
 
                     continue;

@@ -16,7 +16,7 @@ class Renderer
     {
         $lines = $this->renderLines();
 
-        return str_replace('{{ outline }}', $lines, file_get_contents(__DIR__ . '/index.twig'));
+        return str_replace('{{ outline }}', $lines, file_get_contents(__DIR__.'/index.twig'));
     }
 
     protected function renderLines()
@@ -36,7 +36,7 @@ class Renderer
 
     protected function renderLine(?array $line, int $max, string $lineNumber): string
     {
-        if (! $line) {
+        if (!$line) {
             return "<div>{$lineNumber}: </div>";
         }
 
@@ -52,7 +52,7 @@ class Renderer
             return "<span class=\"{$class}\" style=\"background-color:{$color}\">&nbsp;</span>";
         }, $line);
 
-        return "<div>{$lineNumber}: " . implode('', $renderedLine) . '</div>';
+        return "<div>{$lineNumber}: ".implode('', $renderedLine).'</div>';
     }
 
     protected function getMaxCharacterValue(array $lines): int
@@ -60,7 +60,7 @@ class Renderer
         $maxPerLine = [];
 
         foreach ($lines as $line) {
-            if (! $line) {
+            if (!$line) {
                 continue;
             }
 
@@ -72,7 +72,7 @@ class Renderer
 
     protected function getColor(int $value, int $max): string
     {
-        $modifier = 1 -  ($value / $max);
+        $modifier = 1 - ($value / $max);
 
         $gray = (245 * $modifier);
 
@@ -85,6 +85,6 @@ class Renderer
             return str_pad(dechex($color), 2, '0', STR_PAD_LEFT);
         }, [$r, $g, $b]);
 
-        return '#' . implode('', $colors);
+        return '#'.implode('', $colors);
     }
 }
