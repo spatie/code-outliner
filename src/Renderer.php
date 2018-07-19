@@ -2,8 +2,6 @@
 
 namespace Spatie\Outline;
 
-use Closure;
-
 class Renderer
 {
     /** @var array */
