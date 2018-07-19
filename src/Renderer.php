@@ -79,11 +79,11 @@ class Renderer
         return $this->getRgbHex($gray, $gray, $gray);
     }
 
-    protected function getRgbHex(int $r, int $g, int $b)
+    protected function getRgbHex(int $red, int $green, int $blue)
     {
         $colors = array_map(function ($color) {
             return str_pad(dechex($color), 2, '0', STR_PAD_LEFT);
-        }, [$r, $g, $b]);
+        }, [$red, $green, $blue]);
 
         return '#'.implode('', $colors);
     }
