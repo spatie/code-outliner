@@ -1,8 +1,9 @@
 <?php
 
-namespace Spatie\CodeOutline;
+namespace Spatie\CodeOutline\Parser;
 
 use Closure;
+use Spatie\CodeOutline\Page;
 use Symfony\Component\Finder\Finder;
 
 class DirectoryParser implements Parser
@@ -56,7 +57,7 @@ class DirectoryParser implements Parser
         return $this;
     }
 
-    public function getParsed(): array
+    public function getParsed(): Page
     {
         $parsedFiles = [];
 
@@ -82,25 +83,24 @@ class DirectoryParser implements Parser
         return $this->summarize($parsedFiles);
     }
 
-    protected function summarize(array $parsedFiles): array
+    /**
+     * @param \Spatie\CodeOutline\Page[] $pages
+     *
+     * @return \Spatie\CodeOutline\Page
+     */
+    protected function summarize(array $pages): Page
     {
-        $summarizedFiles = [];
+        $summarizedPage = new Page();
 
-        foreach ($parsedFiles as $parsedFile) {
-            foreach ($parsedFile as $lineIndex => $line) {
-                if (!$line) {
-                    $summarizedFiles[$lineIndex] = $summarizedFiles[$lineIndex] ?? null;
+        foreach ($pages as $page) {
+            foreach ($page as $lineNumber => $line) {
+                $summarizedLine = $summarizedPage[$lineNumber] ?? new Line();
 
-                    continue;
-                }
-
-                foreach ($line as $cursorIndex => $characterValue) {
-                    $summarizedFiles[$lineIndex][$cursorIndex] = ($summarizedFiles[$lineIndex][$cursorIndex] ?? 0) + $characterValue;
-                }
+                $summarizedPage[$lineNumber] = $summarizedLine->merge($line);
             }
         }
 
-        return $summarizedFiles;
+        return $summarizedPage;
     }
 
     protected function getExtensionsRegex(): string

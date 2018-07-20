@@ -20,9 +20,10 @@
     },
     "require": {
         "php": "^7.1",
-        "symfony/finder": "^4.1",
+        "spatie/browsershot": "^3.23",
+        "spatie/typed": "^0.0.3",
         "symfony/console": "^4.1",
-        "spatie/browsershot": "^3.23"
+        "symfony/finder": "^4.1"
     },
     "require-dev": {
         "larapack/dd": "^1.1"

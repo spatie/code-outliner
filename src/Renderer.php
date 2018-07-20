@@ -4,28 +4,28 @@ namespace Spatie\CodeOutline;
 
 class Renderer
 {
-    /** @var array */
-    protected $lines;
+    /** @var \Spatie\CodeOutline\Page */
+    protected $page;
 
-    public function __construct(array $lines)
+    public function __construct(Page $page)
     {
-        $this->lines = $lines;
+        $this->page = $page;
     }
 
     public function getRendered(): string
     {
-        $lines = $this->renderLines();
+        $rendered = $this->renderPage();
 
-        return str_replace('{{ outline }}', $lines, file_get_contents(__DIR__.'/index.twig'));
+        return str_replace('{{ outline }}', $rendered, file_get_contents(__DIR__.'/index.twig'));
     }
 
-    protected function renderLines()
+    protected function renderPage()
     {
         $rendered = [];
 
-        $maximumCharacterPositionDensity = $this->getMaximumCharacterPositionDensity($this->lines);
+        $maximumCharacterPositionDensity = $this->page->getMaximumCharacterPositionDensity();
 
-        foreach ($this->lines as $lineNumber => $line) {
+        foreach ($this->page as $lineNumber => $line) {
             $lineNumber = str_pad($lineNumber, 3, '0', STR_PAD_LEFT);
 
             $rendered[] = $this->renderLine($line, $maximumCharacterPositionDensity, $lineNumber);
@@ -34,7 +34,7 @@ class Renderer
         return implode(PHP_EOL, $rendered);
     }
 
-    protected function renderLine(?array $line, int $maximumCharacterPositionDensity, string $lineNumber): string
+    protected function renderLine(?Line $line, int $maximumCharacterPositionDensity, string $lineNumber): string
     {
         if (!$line) {
             return "<div>{$lineNumber}: </div>";
@@ -50,24 +50,9 @@ class Renderer
             $color = $this->getColor($characterValue, $maximumCharacterPositionDensity);
 
             return "<span class=\"{$class}\" style=\"background-color:{$color}\">&nbsp;</span>";
-        }, $line);
+        }, $line->toArray());
 
         return "<div>{$lineNumber}: ".implode('', $renderedLine).'</div>';
-    }
-
-    protected function getMaximumCharacterPositionDensity(array $lines): int
-    {
-        $maximumDensityForLine = [];
-
-        foreach ($lines as $line) {
-            if (!$line) {
-                continue;
-            }
-
-            $maximumDensityForLine[] = max($line);
-        }
-
-        return max($maximumDensityForLine);
     }
 
     protected function getColor(int $value, int $max): string

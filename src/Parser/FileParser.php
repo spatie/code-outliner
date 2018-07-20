@@ -1,6 +1,9 @@
 <?php
 
-namespace Spatie\CodeOutline;
+namespace Spatie\CodeOutline\Parser;
+
+use Spatie\CodeOutline\Line;
+use Spatie\CodeOutline\Page;
 
 class FileParser implements Parser
 {
@@ -12,13 +15,13 @@ class FileParser implements Parser
         $this->path = $path;
     }
 
-    public function getParsed(): array
+    public function getParsed(): Page
     {
         $contents = file_get_contents($this->path);
 
         $lines = explode(PHP_EOL, $contents);
 
-        $outline = [];
+        $page = new Page();
 
         foreach ($lines as $line) {
             if (!strlen($line)) {
@@ -29,17 +32,13 @@ class FileParser implements Parser
 
             $totalLineCount = strlen($line);
 
-            $characterLineCount = strlen(ltrim($line));
+            $characterCount = strlen(ltrim($line));
 
-            $indentLineCount = $totalLineCount - $characterLineCount;
+            $indentationCount = $totalLineCount - $characterCount;
 
-            $indentLine = array_fill(0, $indentLineCount, -1);
-
-            $characterLine = array_fill(0, $characterLineCount, 1);
-
-            $outline[] = array_merge($indentLine, $characterLine);
+            $page[] = Line::make($indentationCount, $characterCount);
         }
 
-        return $outline;
+        return $page;
     }
 }
