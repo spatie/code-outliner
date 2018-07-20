@@ -1,12 +1,13 @@
 <?php
 
-namespace Spatie\CodeOutline\Parser\Commands;
+namespace Spatie\CodeOutline\Commands;
 
 use Spatie\Browsershot\Browsershot;
+use Spatie\CodeOutline\Elements\Page;
 use Spatie\CodeOutline\Parser\DirectoryParser;
 use Spatie\CodeOutline\Parser\FileParser;
 use Spatie\CodeOutline\Parser\Parser;
-use Spatie\CodeOutline\Parser\Renderer;
+use Spatie\CodeOutline\Renderer\Renderer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -38,7 +39,7 @@ class OutlineFileCommand extends Command
         $output->writeln("Saved to {$outputFilePath}");
     }
 
-    protected function parseFiles(InputInterface $input, OutputInterface $output): array
+    protected function parseFiles(InputInterface $input, OutputInterface $output): Page
     {
         $path = $input->getArgument('path');
 
@@ -53,7 +54,7 @@ class OutlineFileCommand extends Command
         return $parser->getParsed();
     }
 
-    protected function renderParsed(array $parsed, InputInterface $input, OutputInterface $output)
+    protected function renderParsed(Page $parsed, InputInterface $input, OutputInterface $output)
     {
         $output->writeln("\nRendering...");
 

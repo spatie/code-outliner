@@ -2,7 +2,7 @@
 
 namespace Spatie\CodeOutline;
 
-use Spatie\CodeOutline\Parser\Commands\OutlineFileCommand;
+use Spatie\CodeOutline\Commands\OutlineFileCommand;
 use Symfony\Component\Console\Application;
 
 class OutlinerApplication extends Application

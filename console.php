@@ -2,7 +2,7 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-use Spatie\CodeOutline\Parser\Commands\OutlineFileCommand;
+use Spatie\CodeOutline\Commands\OutlineFileCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
