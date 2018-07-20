@@ -23,31 +23,31 @@ class Renderer
     {
         $rendered = [];
 
-        $maximumLineLength = $this->getMaximumLineLength($this->lines);
+        $maximumCharacterPositionDensity = $this->getMaximumCharacterPositionDensity($this->lines);
 
         foreach ($this->lines as $lineNumber => $line) {
             $lineNumber = str_pad($lineNumber, 3, '0', STR_PAD_LEFT);
 
-            $rendered[] = $this->renderLine($line, $maximumLineLength, $lineNumber);
+            $rendered[] = $this->renderLine($line, $maximumCharacterPositionDensity, $lineNumber);
         }
 
         return implode(PHP_EOL, $rendered);
     }
 
-    protected function renderLine(?array $line, int $maximumLineLength, string $lineNumber): string
+    protected function renderLine(?array $line, int $maximumCharacterPositionDensity, string $lineNumber): string
     {
         if (!$line) {
             return "<div>{$lineNumber}: </div>";
         }
 
-        $renderedLine = array_map(function ($characterValue) use ($maximumLineLength) {
+        $renderedLine = array_map(function ($characterValue) use ($maximumCharacterPositionDensity) {
             $class = 'code';
 
             if ($characterValue < 0) {
                 $class .= ' indent';
             }
 
-            $color = $this->getColor($characterValue, $maximumLineLength);
+            $color = $this->getColor($characterValue, $maximumCharacterPositionDensity);
 
             return "<span class=\"{$class}\" style=\"background-color:{$color}\">&nbsp;</span>";
         }, $line);
@@ -55,19 +55,19 @@ class Renderer
         return "<div>{$lineNumber}: ".implode('', $renderedLine).'</div>';
     }
 
-    protected function getMaximumLineLength(array $lines): int
+    protected function getMaximumCharacterPositionDensity(array $lines): int
     {
-        $maximumLineLenghts = [];
+        $maximumDensityForLine = [];
 
         foreach ($lines as $line) {
             if (!$line) {
                 continue;
             }
 
-            $maximumLineLenghts[] = max($line);
+            $maximumDensityForLine[] = max($line);
         }
 
-        return max($maximumLineLenghts);
+        return max($maximumDensityForLine);
     }
 
     protected function getColor(int $value, int $max): string
