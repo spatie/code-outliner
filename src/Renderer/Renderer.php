@@ -1,10 +1,14 @@
 <?php
 
-namespace Spatie\CodeOutline;
+namespace Spatie\CodeOutline\Renderer;
+
+use Spatie\CodeOutline\Elements\EmptyLine;
+use Spatie\CodeOutline\Elements\Line;
+use Spatie\CodeOutline\Elements\Page;
 
 class Renderer
 {
-    /** @var \Spatie\CodeOutline\Page */
+    /** @var \Spatie\CodeOutline\Elements\Page */
     protected $page;
 
     public function __construct(Page $page)

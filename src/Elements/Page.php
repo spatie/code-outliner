@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\CodeOutline;
+namespace Spatie\CodeOutline\Elements;
 
 use Spatie\Typed\Collection;
 use Spatie\Typed\T;

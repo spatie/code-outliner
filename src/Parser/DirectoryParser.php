@@ -3,7 +3,8 @@
 namespace Spatie\CodeOutline\Parser;
 
 use Closure;
-use Spatie\CodeOutline\Page;
+use Spatie\CodeOutline\Elements\Line;
+use Spatie\CodeOutline\Elements\Page;
 use Symfony\Component\Finder\Finder;
 
 class DirectoryParser implements Parser
@@ -84,9 +85,9 @@ class DirectoryParser implements Parser
     }
 
     /**
-     * @param \Spatie\CodeOutline\Page[] $pages
+     * @param \Spatie\CodeOutline\Elements\Page[] $pages
      *
-     * @return \Spatie\CodeOutline\Page
+     * @return \Spatie\CodeOutline\Elements\Page
      */
     protected function summarize(array $pages): Page
     {

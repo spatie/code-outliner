@@ -2,7 +2,7 @@
 
 namespace Spatie\CodeOutline\Parser;
 
-use Spatie\CodeOutline\Page;
+use Spatie\CodeOutline\Elements\Page;
 
 interface Parser
 {

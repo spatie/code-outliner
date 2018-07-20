@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\CodeOutline;
+namespace Spatie\CodeOutline\Elements;
 
 class EmptyLine extends Line
 {

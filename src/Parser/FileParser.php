@@ -2,9 +2,9 @@
 
 namespace Spatie\CodeOutline\Parser;
 
-use Spatie\CodeOutline\EmptyLine;
-use Spatie\CodeOutline\Line;
-use Spatie\CodeOutline\Page;
+use Spatie\CodeOutline\Elements\EmptyLine;
+use Spatie\CodeOutline\Elements\Line;
+use Spatie\CodeOutline\Elements\Page;
 
 class FileParser implements Parser
 {
