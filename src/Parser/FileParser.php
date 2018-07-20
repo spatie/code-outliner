@@ -2,6 +2,7 @@
 
 namespace Spatie\CodeOutline\Parser;
 
+use Spatie\CodeOutline\EmptyLine;
 use Spatie\CodeOutline\Line;
 use Spatie\CodeOutline\Page;
 
@@ -25,7 +26,7 @@ class FileParser implements Parser
 
         foreach ($lines as $line) {
             if (!strlen($line)) {
-                $outline[] = null;
+                $page[] = new EmptyLine();
 
                 continue;
             }

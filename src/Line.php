@@ -36,7 +36,9 @@ class Line extends Collection
 
     public function getMaximumCharacterPositionDensity(): int
     {
-        return max($this->data);
+        return $this->count()
+            ? max($this->data)
+            : 0;
     }
 
     public function offsetGet($offset): int

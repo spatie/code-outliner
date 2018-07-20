@@ -26,7 +26,7 @@ class Renderer
         $maximumCharacterPositionDensity = $this->page->getMaximumCharacterPositionDensity();
 
         foreach ($this->page as $lineNumber => $line) {
-            $lineNumber = str_pad($lineNumber, 3, '0', STR_PAD_LEFT);
+            $lineNumber = str_pad($lineNumber + 1, 3, '0', STR_PAD_LEFT);
 
             $rendered[] = $this->renderLine($line, $maximumCharacterPositionDensity, $lineNumber);
         }
@@ -34,9 +34,9 @@ class Renderer
         return implode(PHP_EOL, $rendered);
     }
 
-    protected function renderLine(?Line $line, int $maximumCharacterPositionDensity, string $lineNumber): string
+    protected function renderLine(Line $line, int $maximumCharacterPositionDensity, string $lineNumber): string
     {
-        if (!$line) {
+        if ($line instanceof EmptyLine) {
             return "<div>{$lineNumber}: </div>";
         }
 
