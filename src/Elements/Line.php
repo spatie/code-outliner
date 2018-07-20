@@ -12,7 +12,7 @@ class Line extends Collection
         parent::__construct(T::int(), $values);
     }
 
-    public static function make(int $indentationCount, int $characterCount): Line
+    public static function make(int $indentationCount, int $characterCount): self
     {
         $indentationValues = array_fill(0, $indentationCount, -1);
 
@@ -23,7 +23,7 @@ class Line extends Collection
         return new self(...$lineValues);
     }
 
-    public function merge(Line $line): Line
+    public function merge(self $line): self
     {
         $mergedLine = clone $this;
 
