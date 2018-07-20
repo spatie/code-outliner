@@ -30,9 +30,9 @@ class OutlineFileCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $parsed = $this->parseFiles($input, $output);
+        $page = $this->parseFiles($input, $output);
 
-        $rendered = $this->renderParsed($parsed, $input, $output);
+        $rendered = $this->renderParsed($page, $input, $output);
 
         $outputFilePath = $this->saveImage($rendered, $input, $output);
 
@@ -54,11 +54,11 @@ class OutlineFileCommand extends Command
         return $parser->getParsed();
     }
 
-    protected function renderParsed(Page $parsed, InputInterface $input, OutputInterface $output)
+    protected function renderParsed(Page $page, InputInterface $input, OutputInterface $output)
     {
         $output->writeln("\nRendering...");
 
-        $renderer = new Renderer($parsed);
+        $renderer = new Renderer($page);
 
         return $renderer->getRendered();
     }
