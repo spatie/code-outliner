@@ -16,7 +16,7 @@ class OutlinerTest extends TestCase
 
         $renderer = new Renderer($parser->getParsed());
 
-        $this->assertEquals(file_get_contents(__DIR__.'/data/output.html'), $renderer->getRendered());
+        $this->assertContains(file_get_contents(__DIR__.'/data/output.html'), $renderer->getRendered());
     }
 
     /** @test */
@@ -26,6 +26,6 @@ class OutlinerTest extends TestCase
 
         $renderer = new Renderer($parser->getParsed());
 
-        $this->assertEquals(file_get_contents(__DIR__ . '/data/output_merged.html'), $renderer->getRendered());
+        $this->assertContains(file_get_contents(__DIR__ . '/data/output_merged.html'), $renderer->getRendered());
     }
 }
