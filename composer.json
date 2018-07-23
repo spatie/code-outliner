@@ -21,7 +21,7 @@
     "require": {
         "php": "^7.1",
         "spatie/browsershot": "^3.23",
-        "spatie/typed": "^0.0.3",
+        "spatie/typed": "^0.1",
         "symfony/console": "^4.1",
         "symfony/finder": "^4.1"
     },
