@@ -4,7 +4,6 @@ namespace Spatie\CodeOutline\Parser;
 
 use Closure;
 use Spatie\CodeOutline\Elements\EmptyLine;
-use Spatie\CodeOutline\Elements\Line;
 use Spatie\CodeOutline\Elements\Page;
 use Symfony\Component\Finder\Finder;
 
