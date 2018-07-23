@@ -25,12 +25,20 @@ class Line extends Collection
         return new self(...$lineValues);
     }
 
-    public function merge(self $line): self
+    public function merge(Line $line): Line
     {
-        $mergedLine = clone $this;
+        $mergedLine = new Line();
 
-        foreach ($line as $position => $value) {
-            $mergedLine[$position] = ($this[$position] ?? 0) + $value;
+        $largestLine = $this->count() > $line->count()
+            ? $this
+            : $line;
+
+        foreach ($largestLine as $position => $value) {
+            $mergedLine[$position] = ($this[$position] ?? 0) + ($line[$position] ?? 0);
+        }
+
+        if (! $largestLine->count()) {
+            return new EmptyLine();
         }
 
         return $mergedLine;

@@ -1,0 +1,79 @@
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Monaco, "Ubuntu Mono", monospace;
+            padding:.7em .5em;
+            font-size: 10px;
+            position: relative;
+            width: auto;
+        }
+
+        div {
+            white-space: nowrap;
+        }
+
+        .margin {
+            display: block;
+            content: ' ';
+            position: absolute;
+            height: 100%;
+            top: 0;
+        }
+
+        .margin80 {
+            border-right: 1px dashed blue;
+            left: 80ch;
+        }
+
+        .margin80:after {
+            content: '80';
+            color: blue;
+            position: absolute;
+            margin-left: 5px;
+        }
+
+        .margin120 {
+            border-right: 1px dashed red;
+            left: 120ch;
+        }
+
+        .margin120:after {
+            content: '120';
+            color: red;
+            position: absolute;
+            margin-left: 5px;
+        }
+
+        .code {
+            display: inline-block;
+            background-color: #A5A5A5;
+        }
+
+        .indent {
+            display: inline-block;
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="margin margin80">&nbsp;</div>
+<div class="margin margin120">&nbsp;</div>
+
+<div>001: <span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span></div>
+<div>002: </div>
+<div>003: <span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span></div>
+<div>004: <span class="code" style="background-color:#7a7a7a">&nbsp;</span><span class="code" style="background-color:#7a7a7a">&nbsp;</span><span class="code" style="background-color:#7a7a7a">&nbsp;</span><span class="code" style="background-color:#7a7a7a">&nbsp;</span></div>
+<div>005: <span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span><span class="code" style="background-color:#000000">&nbsp;</span></div>
+<div>006: </div>
+
+</body>
+</html>
