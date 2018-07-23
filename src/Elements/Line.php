@@ -25,7 +25,7 @@ class Line extends Collection
         return new self(...$lineValues);
     }
 
-    public function merge(self $line): self
+    public function merge(Line $line): Line
     {
         $mergedLine = clone $this;
 
