@@ -11,10 +11,10 @@ class OutlinerTest extends TestCase
     /** @test */
     public function outline_renders_correctly()
     {
-        $parser = new FileParser(__DIR__ . '/data/outline.php');
+        $parser = new FileParser(__DIR__.'/data/outline.php');
 
         $renderer = new Renderer($parser->getParsed());
 
-        $this->assertEquals(file_get_contents(__DIR__ . '/data/output.html'), $renderer->getRendered());
+        $this->assertEquals(file_get_contents(__DIR__.'/data/output.html'), $renderer->getRendered());
     }
 }
