@@ -9,7 +9,9 @@ class Line extends Collection
 {
     public function __construct(int ...$values)
     {
-        parent::__construct(T::int(), $values);
+        parent::__construct(T::int());
+
+        $this->set($values);
     }
 
     public static function make(int $indentationCount, int $characterCount): self

@@ -21,16 +21,22 @@
     "require": {
         "php": "^7.1",
         "spatie/browsershot": "^3.23",
-        "spatie/typed": "^0.1",
+        "spatie/typed": "^0.1.1",
         "symfony/console": "^4.1",
         "symfony/finder": "^4.1"
     },
     "require-dev": {
-        "larapack/dd": "^1.1"
+        "larapack/dd": "^1.1",
+        "phpunit/phpunit": "^7.2"
     },
     "autoload": {
         "psr-4": {
             "Spatie\\CodeOutline\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Spatie\\CodeOutline\\Tests\\": "tests/"
         }
     },
     "bin": [
