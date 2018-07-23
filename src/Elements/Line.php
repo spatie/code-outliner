@@ -25,9 +25,9 @@ class Line extends Collection
         return new self(...$lineValues);
     }
 
-    public function merge(Line $line): Line
+    public function merge(self $line): self
     {
-        $mergedLine = new Line();
+        $mergedLine = new self();
 
         $largestLine = $this->count() > $line->count()
             ? $this
@@ -37,7 +37,7 @@ class Line extends Collection
             $mergedLine[$position] = ($this[$position] ?? 0) + ($line[$position] ?? 0);
         }
 
-        if (! $largestLine->count()) {
+        if (!$largestLine->count()) {
             return new EmptyLine();
         }
 
