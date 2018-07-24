@@ -22,10 +22,10 @@ class OutlinerTest extends TestCase
     /** @test */
     public function outline_renders_multiple_correctly()
     {
-        $parser = new DirectoryParser(__DIR__ . '/data/merged');
+        $parser = new DirectoryParser(__DIR__.'/data/merged');
 
         $renderer = new Renderer($parser->getParsed());
 
-        $this->assertContains(file_get_contents(__DIR__ . '/data/output_merged.html'), $renderer->getRendered());
+        $this->assertContains(file_get_contents(__DIR__.'/data/output_merged.html'), $renderer->getRendered());
     }
 }
