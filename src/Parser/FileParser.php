@@ -14,7 +14,7 @@ class FileParser implements Parser
 
     public function __construct(string $path)
     {
-        if (! file_exists($path)) {
+        if (!file_exists($path)) {
             throw FileNotFound::path($path);
         }
 
