@@ -5,6 +5,7 @@ namespace Spatie\CodeOutline\Parser;
 use Spatie\CodeOutline\Elements\EmptyLine;
 use Spatie\CodeOutline\Elements\Line;
 use Spatie\CodeOutline\Elements\Page;
+use Spatie\CodeOutline\Exceptions\FileNotFound;
 
 class FileParser implements Parser
 {
@@ -13,6 +14,10 @@ class FileParser implements Parser
 
     public function __construct(string $path)
     {
+        if (! file_exists($path)) {
+            throw FileNotFound::path($path);
+        }
+
         $this->path = $path;
     }
 
