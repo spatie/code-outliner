@@ -30,7 +30,7 @@ class FileParser implements Parser
         $page = new Page();
 
         foreach ($lines as $line) {
-            if (!strlen($line)) {
+            if (strlen($line) === 0) {
                 $page[] = new EmptyLine();
 
                 continue;
