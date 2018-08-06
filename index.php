@@ -1,8 +1,8 @@
 <?php
 
-use Spatie\CodeOutline\DirectoryParser;
-use Spatie\CodeOutline\FileParser;
-use Spatie\CodeOutline\Renderer;
+use Spatie\CodeOutline\Parser\DirectoryParser;
+use Spatie\CodeOutline\Parser\FileParser;
+use Spatie\CodeOutline\Renderer\Renderer;
 
 require_once __DIR__.'/vendor/autoload.php';
 
