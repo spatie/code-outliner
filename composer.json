@@ -19,7 +19,7 @@
         "sort-packages": true
     },
     "require": {
-        "php": "^7.1",
+        "php": "^7.4",
         "spatie/browsershot": "^3.23",
         "spatie/typed": "^0.1.1",
         "symfony/console": "^4.1",
