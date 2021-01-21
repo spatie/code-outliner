@@ -34,9 +34,11 @@ class OutlineFileCommand extends Command
 
         $rendered = $this->renderParsed($page, $input, $output);
 
-        $outputFilePath = $this->saveImage($rendered, $input, $output);
+        $this->saveHtml($rendered, $input, $output);
 
-        $output->writeln("Saved to {$outputFilePath}");
+        $this->saveImage($rendered, $input, $output);
+
+        return self::SUCCESS;
     }
 
     protected function parseFiles(InputInterface $input, OutputInterface $output): Page
@@ -63,15 +65,28 @@ class OutlineFileCommand extends Command
         return $renderer->getRendered();
     }
 
-    protected function saveImage(string $rendered, InputInterface $input, OutputInterface $output): string
+    protected function saveHtml(string $rendered, InputInterface $input, OutputInterface $output): void
+    {
+        $output->writeln('Saving as HTML...');
+
+        $outputFilePath = $this->getOutputFilePath($input->getOption('output')) . '.html';
+
+        file_put_contents($outputFilePath, $rendered);
+
+        $output->writeln("Saved in {$outputFilePath}");
+    }
+
+    protected function saveImage(string $rendered, InputInterface $input, OutputInterface $output): void
     {
         $output->writeln('Saving as image...');
 
         $outputFilePath = $this->getOutputFilePath($input->getOption('output'));
 
-        Browsershot::html($rendered)->select('body')->save($outputFilePath);
+        Browsershot::html($rendered)
+            ->timeout(1000 * 10)
+            ->select('body')->save($outputFilePath);
 
-        return $outputFilePath;
+        $output->writeln("Saved in {$outputFilePath}");
     }
 
     protected function getOutputFilePath(?string $path): string

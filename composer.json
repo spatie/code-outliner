@@ -22,12 +22,13 @@
         "php": "^7.4",
         "spatie/browsershot": "^3.23",
         "spatie/typed": "^0.1.1",
-        "symfony/console": "^4.1",
-        "symfony/finder": "^4.1"
+        "symfony/console": "^5.0",
+        "symfony/finder": "^5.0"
     },
     "require-dev": {
         "larapack/dd": "^1.1",
-        "phpunit/phpunit": "^7.2"
+        "phpunit/phpunit": "^7.2",
+        "spatie/laravel-ray": "^1.8"
     },
     "autoload": {
         "psr-4": {
