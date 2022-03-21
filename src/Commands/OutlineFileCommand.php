@@ -69,7 +69,7 @@ class OutlineFileCommand extends Command
     {
         $output->writeln('Saving as HTML...');
 
-        $outputFilePath = $this->getOutputFilePath($input->getOption('output')) . '.html';
+        $outputFilePath = $this->getOutputFilePath($input->getOption('output')).'.html';
 
         file_put_contents($outputFilePath, $rendered);
 
