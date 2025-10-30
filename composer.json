@@ -22,8 +22,8 @@
         "php": "^7.4",
         "spatie/browsershot": "^3.23",
         "spatie/typed": "^0.1.1",
-        "symfony/console": "^5.0",
-        "symfony/finder": "^5.0"
+        "symfony/console": "^5.0 || ^6.0 || ^7.0 || ^8.0",
+        "symfony/finder": "^5.0 || ^6.0 || ^7.0 || ^8.0"
     },
     "require-dev": {
         "larapack/dd": "^1.1",
